@@ -7,5 +7,6 @@ public class BookStoreDbContext(DbContextOptions<BookStoreDbContext> options) : 
 {
     public DbSet<BookEntity> Books { get; set; }
 
+    public DbSet<UserEntity> Users { get; set; }
 
 }

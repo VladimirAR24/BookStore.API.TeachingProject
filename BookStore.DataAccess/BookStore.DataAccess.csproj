@@ -23,4 +23,8 @@
     <ProjectReference Include="..\BookStore.Core\BookStore.CoreDomain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
 </Project>
