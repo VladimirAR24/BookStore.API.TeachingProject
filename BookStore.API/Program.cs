@@ -3,6 +3,7 @@ using BookStore.CoreDomain.Abstractions;
 using BookStore.DataAccess;
 using BookStore.DataAccess.Repositories;
 using BookStore.Infrastructure;
+using Microsoft.AspNetCore.CookiePolicy;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -37,8 +38,14 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
-
+//app.UseCookiePolicy(new CookiePolicyOptions
+//{
+//    MinimumSameSitePolicy = SameSiteMode.Strict,
+//    HttpOnly = HttpOnlyPolicy.Always,
+//    Secure = CookieSecurePolicy.Always
+//});
 app.MapControllers();
 
 app.Run();

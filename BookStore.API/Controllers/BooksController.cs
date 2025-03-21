@@ -1,6 +1,7 @@
 ﻿using BookStore.API.Contracts;
 using BookStore.CoreDomain.Abstractions;
 using BookStore.CoreDomain.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookStore.API.Controllers;
@@ -17,6 +18,7 @@ public class BooksController : ControllerBase
     }
 
     [HttpGet]
+    [Authorize]
     public async Task<ActionResult<List<BooksResponse>>> GetBooks()
     {
         var books = await _booksService.GetAllBooks();
