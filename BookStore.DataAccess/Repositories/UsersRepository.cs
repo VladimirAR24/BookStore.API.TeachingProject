@@ -1,10 +1,11 @@
-﻿using BookStore.CoreDomain.Models;
+﻿using BookStore.CoreDomain.Abstractions;
+using BookStore.CoreDomain.Models;
 using BookStore.DataAccess.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace BookStore.DataAccess.Repositories;
 
-public class UsersRepository
+public class UsersRepository : IUsersRepository
 {
     private readonly BookStoreDbContext _context;
 
@@ -40,7 +41,7 @@ public class UsersRepository
     {
         var userEntity = await _context.Users
             .AsNoTracking()
-            .FirstOrDefaultAsync(u => u.Email == email);
+            .FirstOrDefaultAsync(u => u.Email == email) ?? throw new Exception();
 
         //TODO : ИСПОЛЬЗОВАТЬ IMapper из AutoMapper вместо ручного
         //TODO : Валидация юзера

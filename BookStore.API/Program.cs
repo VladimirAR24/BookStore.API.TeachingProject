@@ -2,6 +2,7 @@ using BookStore.Application.Services;
 using BookStore.CoreDomain.Abstractions;
 using BookStore.DataAccess;
 using BookStore.DataAccess.Repositories;
+using BookStore.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,9 +16,16 @@ builder.Services.AddDbContext<BookStoreDbContext>(
     {
         options.UseNpgsql(builder.Configuration.GetConnectionString(nameof(BookStoreDbContext)));
     });
+builder.Services.Configure<JwtOptions>(builder.Configuration.GetSection(nameof(JwtOptions)));
+
 builder.Services.AddScoped<IBooksService, BooksService>();
 builder.Services.AddScoped<IBooksRepository, BooksRepository>();
 
+builder.Services.AddScoped<IJwtProvider, JwtProvider >();
+builder.Services.AddScoped<IPasswordHasher, PasswordHasher>();
+
+builder.Services.AddScoped<IUsersRepository, UsersRepository>();
+builder.Services.AddScoped<IUsersService, UsersService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
