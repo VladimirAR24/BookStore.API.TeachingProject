@@ -2,7 +2,7 @@ using BookStore.Application.Services;
 using BookStore.CoreDomain.Abstractions;
 using BookStore.DataAccess;
 using BookStore.DataAccess.Repositories;
-using BookStore.Infrastructure;
+using BookStore.Infrastructure.Authentification;
 using Microsoft.AspNetCore.CookiePolicy;
 using Microsoft.EntityFrameworkCore;
 
@@ -46,6 +46,8 @@ app.UseAuthorization();
 //    HttpOnly = HttpOnlyPolicy.Always,
 //    Secure = CookieSecurePolicy.Always
 //});
+
+
 app.MapControllers();
 
 app.Run();

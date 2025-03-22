@@ -6,7 +6,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace BookStore.Infrastructure;
+namespace BookStore.Infrastructure.Authentification;
 
 public class JwtProvider : IJwtProvider
 {
@@ -18,7 +18,9 @@ public class JwtProvider : IJwtProvider
     }
     public string GenerateToken(User user)
     {
-        Claim[] claims = [new("userId", user.Id.ToString())];
+        Claim[] claims = [
+            new("userId", user.Id.ToString()),
+        ];
 
         var signingCredentials = new SigningCredentials(
             new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_options.SecretKey)),

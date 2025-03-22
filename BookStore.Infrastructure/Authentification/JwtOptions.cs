@@ -1,4 +1,4 @@
-﻿namespace BookStore.Infrastructure;
+﻿namespace BookStore.Infrastructure.Authentification;
 
 public class JwtOptions
 {

@@ -1,6 +1,6 @@
 ﻿using BookStore.CoreDomain.Abstractions;
 
-namespace BookStore.Infrastructure;
+namespace BookStore.Infrastructure.Authentification;
 
 public class PasswordHasher : IPasswordHasher
 {
