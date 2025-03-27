@@ -35,13 +35,7 @@ public static class ApiExtensions
                     }
                 };
             });
-        
-        services.AddAuthorization(options =>
-        {
-            options.AddPolicy("AdminPolicy", policy =>
-            {
-                policy.Requirements.Add();
-            });
-        });
+
+        services.AddAuthorization();
     }
 }
