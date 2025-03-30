@@ -13,14 +13,17 @@ public class RolePermissionConfigurations : IEntityTypeConfiguration<RolePermiss
     {
         _authorization = authorization;
     }
+
     public void Configure(EntityTypeBuilder<RolePermissionEntity> builder)
     {
         builder.HasKey(r => new { r.RoleId, r.PermissionId });
 
-        builder.HasData(ParseRolePermissions());
+        var rolePermitions = ParseRolePermissions();
+
+        builder.HasData(rolePermitions);
     }
 
-    private RolePermissionEntity[] ParseRolePermissions()
+    private List<RolePermissionEntity> ParseRolePermissions()
     {
         return _authorization.RolePermissions
             .SelectMany(rp => rp.Permissions
@@ -29,6 +32,6 @@ public class RolePermissionConfigurations : IEntityTypeConfiguration<RolePermiss
                     RoleId = (int)Enum.Parse<Role>(rp.Role),
                     PermissionId = (int)Enum.Parse<Permission>(p)
                 }))
-            .ToArray();
+            .ToList();
     }
 }

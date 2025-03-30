@@ -17,7 +17,7 @@ builder.Services.AddDbContext<BookStoreDbContext>(
         options.UseNpgsql(builder.Configuration.GetConnectionString(nameof(BookStoreDbContext)));
     });
 builder.Services.Configure<JwtOptions>(builder.Configuration.GetSection(nameof(JwtOptions)));
-IServiceCollection serviceCollection = builder.Services.Configure<BookStore.DataAccess.AuthorizationOptions>(builder.Configuration.GetSection(nameof(AuthorizationOptions)));
+builder.Services.Configure<BookStore.DataAccess.AuthorizationOptions>(builder.Configuration.GetSection(nameof(AuthorizationOptions)));
 
 builder.Services.AddScoped<IBooksService, BooksService>();
 builder.Services.AddScoped<IBooksRepository, BooksRepository>();

@@ -6,7 +6,7 @@ public class RoleEntity
 
     public string Name { get; set; }
 
-    public ICollection<PermissionEntity> Permissions { get; set; }
+    public ICollection<PermissionEntity> Permissions { get; set; } = [];
 
-    public ICollection<UserEntity> Users { get; set; }
+    public ICollection<UserEntity> Users { get; set; } = [];
 }

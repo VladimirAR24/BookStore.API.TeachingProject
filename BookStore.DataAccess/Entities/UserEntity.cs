@@ -10,5 +10,5 @@ public class UserEntity
 
     public string Email { get; set; }
 
-    public ICollection<RoleEntity> Roles { get; set; }
+    public ICollection<RoleEntity> Roles { get; set; } = [];
 }
