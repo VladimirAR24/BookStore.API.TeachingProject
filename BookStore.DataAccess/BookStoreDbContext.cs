@@ -17,7 +17,6 @@ public class BookStoreDbContext(DbContextOptions<BookStoreDbContext> options) : 
     {
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(BookStoreDbContext).Assembly);
 
-        //modelBuilder.ApplyConfiguration(new RolePermissionConfigurations(authOptions.Value));
     }
 
 }
