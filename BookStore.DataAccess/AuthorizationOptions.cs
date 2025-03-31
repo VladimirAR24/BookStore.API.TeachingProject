@@ -2,7 +2,7 @@
 
 public class AuthorizationOptions
 {
-    public RolePermissions[] RolePermissions { get; set; } = [];
+    public List<RolePermissions> RolePermissions { get; set; } = [];
 }
 
 public class RolePermissions

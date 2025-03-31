@@ -2,17 +2,12 @@
 using BookStore.DataAccess.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System.Net;
 
 namespace BookStore.DataAccess.Configurations;
 
-public class RolePermissionConfigurations : IEntityTypeConfiguration<RolePermissionEntity>
+public class RolePermissionConfigurations() : IEntityTypeConfiguration<RolePermissionEntity>
 {
-    private readonly AuthorizationOptions _authorization;
-
-    public RolePermissionConfigurations(AuthorizationOptions authorization)
-    {
-        _authorization = authorization;
-    }
 
     public void Configure(EntityTypeBuilder<RolePermissionEntity> builder)
     {
@@ -25,7 +20,8 @@ public class RolePermissionConfigurations : IEntityTypeConfiguration<RolePermiss
 
     private List<RolePermissionEntity> ParseRolePermissions()
     {
-        return _authorization.RolePermissions
+        var authorizationOptions = new AuthorizationOptions();
+        return authorizationOptions.RolePermissions
             .SelectMany(rp => rp.Permissions
                 .Select(p => new RolePermissionEntity
                 {

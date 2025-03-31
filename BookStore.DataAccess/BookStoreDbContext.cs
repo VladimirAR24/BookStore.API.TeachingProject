@@ -5,8 +5,7 @@ using Microsoft.Extensions.Options;
 
 namespace BookStore.DataAccess;
 
-public class BookStoreDbContext(DbContextOptions<BookStoreDbContext> options,
-    IOptions<AuthorizationOptions> authOptions) : DbContext(options)
+public class BookStoreDbContext(DbContextOptions<BookStoreDbContext> options) : DbContext(options)
 {
     public DbSet<BookEntity> Books { get; set; }
 
@@ -18,7 +17,7 @@ public class BookStoreDbContext(DbContextOptions<BookStoreDbContext> options,
     {
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(BookStoreDbContext).Assembly);
 
-        modelBuilder.ApplyConfiguration(new RolePermissionConfigurations(authOptions.Value));
+        //modelBuilder.ApplyConfiguration(new RolePermissionConfigurations(authOptions.Value));
     }
 
 }
