@@ -5,8 +5,10 @@ using BookStore.CoreDomain.Enums;
 using BookStore.DataAccess;
 using BookStore.DataAccess.Repositories;
 using BookStore.Infrastructure.Authentification;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +22,12 @@ builder.Services.AddDbContext<BookStoreDbContext>(
         options.UseNpgsql(builder.Configuration.GetConnectionString(nameof(BookStoreDbContext)));
     });
 builder.Services.Configure<JwtOptions>(builder.Configuration.GetSection(nameof(JwtOptions)));
+builder.Services.AddApiAuthentication(
+    builder.Configuration,
+    builder.Services.BuildServiceProvider().GetRequiredService<IOptions<JwtOptions>>() // Получаем JwtOptions из DI-контейнера
+);
+
+
 builder.Services.Configure<BookStore.DataAccess.AuthorizationOptions>(builder.Configuration.GetSection(nameof(BookStore.DataAccess.AuthorizationOptions)));
 
 builder.Services.AddScoped<IBooksService, BooksService>();
