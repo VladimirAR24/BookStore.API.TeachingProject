@@ -1,4 +1,5 @@
-﻿using BookStore.Infrastructure.Authentification;
+﻿using BookStore.CoreDomain.Enums;
+using BookStore.Infrastructure.Authentification;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -37,5 +38,13 @@ public static class ApiExtensions
             });
 
         services.AddAuthorization();
+    }
+
+    public static IEndpointConventionBuilder RequirePermissions<TBuilder>(
+        this TBuilder builder, params Permission[] permissions)
+        where TBuilder : IEndpointConventionBuilder
+    {
+        return builder.RequireAuthorization(policy =>
+        policy.AddRequirements(new PermissionRequirement(permissions)));
     }
 }

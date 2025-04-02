@@ -1,9 +1,8 @@
 ﻿using BookStore.CoreDomain.Models;
 
-namespace BookStore.CoreDomain.Abstractions
+namespace BookStore.CoreDomain.Abstractions;
+
+public interface IJwtProvider
 {
-    public interface IJwtProvider
-    {
-        string GenerateToken(User user);
-    }
+    string GenerateToken(User user);
 }

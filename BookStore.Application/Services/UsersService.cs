@@ -22,7 +22,7 @@ public class UsersService : IUsersService
 
         var user = User.Create(Guid.NewGuid(), userName, hashedPassword, email);
 
-        await _usersRepository.Add(user);
+        await _usersRepository.AddQuick(user);
     }
 
     public async Task<string> Login(string email, string password)

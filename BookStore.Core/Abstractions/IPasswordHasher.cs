@@ -1,9 +1,8 @@
-﻿namespace BookStore.CoreDomain.Abstractions
-{
-    public interface IPasswordHasher
-    {
-        string Generate(string password);
+﻿namespace BookStore.CoreDomain.Abstractions;
 
-        bool Verify(string passwrod, string hashedPassword);
-    }
+public interface IPasswordHasher
+{
+    string Generate(string password);
+
+    bool Verify(string passwrod, string hashedPassword);
 }

@@ -27,11 +27,11 @@ public class UserController : ControllerBase
 
     [HttpPost]
     [Route("login")]
-    public async Task<IResult> Login(LoginUserRequest request, HttpContext context)
+    public async Task<IResult> Login(LoginUserRequest request)
     {
         var token = await _usersService.Login(request.Email, request.Password);
 
-        context.Response.Cookies.Append("jwttoken", token);
+        HttpContext.Response.Cookies.Append("jwttoken", token);
 
         return Results.Ok(token);
     }
